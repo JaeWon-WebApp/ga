@@ -5,13 +5,13 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
   keyFilename: './config/GaDataApi.json',
 });
 
-exports.activeUsers = async function() {
+const gaActiveUsers = async () => {
   const [response] = await analyticsDataClient.runReport({
     property: `properties/${secret.viewId}`,
     dateRanges: [
     {
       startDate: '7daysAgo',
-      endDate: 'today',
+      endDate: 'yesterday',
     },
     ],
     dimensions: [
@@ -43,13 +43,13 @@ exports.activeUsers = async function() {
   return response;
 }
 
-exports.devices = async function() {
+const gaDevices = async () => {
   const [response] = await analyticsDataClient.runReport({
-    property: `properties/${property}`,
+    property: `properties/${secret.viewId}`,
     dateRanges: [
     {
       startDate: '30daysAgo',
-      endDate: 'today',
+      endDate: 'yesterday',
     },
     ],
     dimensions: [
@@ -67,13 +67,13 @@ exports.devices = async function() {
   return response;
 }
 
-exports.browsers = async function() {
+const gaBrowsers = async () => {
   const [response] = await analyticsDataClient.runReport({
-    property: `properties/${property}`,
+    property: `properties/${secret.viewId}`,
     dateRanges: [
     {
       startDate: '30daysAgo',
-      endDate: 'today',
+      endDate: 'yesterday',
     },
     ],
     dimensions: [
@@ -89,4 +89,10 @@ exports.browsers = async function() {
   });
 
   return response;
+}
+
+module.exports = {
+  gaActiveUsers,
+  gaDevices,
+  gaBrowsers,
 }
