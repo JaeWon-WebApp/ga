@@ -1,3 +1,4 @@
 node_modules
 config/secret.js
 config/GaDataApi.json
+config/database.js

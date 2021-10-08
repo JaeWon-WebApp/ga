@@ -1,8 +1,13 @@
 const adminProvider = require('./adminProvider');
 
 exports.getDashboard = async function (req, res) {
-  console.time('전체 시간');
   const providerResult = await adminProvider.getDashboard();
   return res.send(providerResult);
-  console.timeEnd('전체 시간');
+}
+
+exports.updateTest = async function (req, res) {
+  const { name, age, married, comment } = req.body;
+  console.log(name, age, married, comment);
+  const testResult = await adminService.postTest(name, age, married, comment);
+  res.send(testResult);
 }
